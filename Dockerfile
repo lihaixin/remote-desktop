@@ -7,7 +7,7 @@ RUN apk add --no-cache xvfb x11vnc fluxbox supervisor xterm bash pcmanfm chromiu
 RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
 
 ADD supervisord.conf /etc/supervisord.conf
-ADD xrdp.ini /etc/xrdp/xrdp.ini
+# ADD xrdp.ini /etc/xrdp/xrdp.ini
 ADD menu /root/.fluxbox/menu
 ADD entry.sh /entry.sh
 
