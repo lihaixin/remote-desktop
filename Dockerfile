@@ -13,13 +13,13 @@ RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html \
 ADD supervisord.conf /etc/supervisord.conf
 # ADD xrdp.ini /etc/xrdp/xrdp.ini
 ADD menu /root/.fluxbox/menu
-ADD entry.sh /entry.sh
+ADD entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entry.sh
+RUN chmod +x /entrypoint.sh
 
 ENV DISPLAY :0
 ENV RESOLUTION=1024x768
 
 EXPOSE 5901 6901 3389
 
-ENTRYPOINT ["/bin/bash", "-c", "/entry.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "/entrypoint.sh"]
