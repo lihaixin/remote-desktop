@@ -1,13 +1,18 @@
-FROM alpine
+FROM alpine:3.12
 
 ENV DISPLAY :0
 ENV RESOLUTION=1024x768
+ENV NO_VNC_HOME /root/noVNC
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk update
-RUN apk add --no-cache xvfb x11vnc fluxbox supervisor xterm bash pcmanfm chromium firefox xrdp wqy-zenhei novnc websockify
-
-RUN ln -s /usr/share/novnc/vnc.html /usr/share/novnc/index.html
+RUN apk update \
+ && apk add --no-cache xvfb x11vnc fluxbox supervisor xterm bash pcmanfm chromium firefox xrdp wqy-zenhei wget ca-certificates tar \
+ && mkdir -p $NO_VNC_HOME/utils/websockify \
+ && wget -qO- https://github.com/noVNC/noVNC/archive/master.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME \
+ && wget -qO- https://github.com/noVNC/websockify/archive/master.tar.gz | tar xz --strip 1 -C $NO_VNC_HOME/utils/websockify \
+ && chmod +x -v /root/noVNC/utils/*.sh \
+ && ln -s $NO_VNC_HOME/vnc_auto.html $NO_VNC_HOME/index.html \
+ && apk del wget
 
 ADD supervisord.conf /etc/supervisord.conf
 ADD xrdp.ini /etc/xrdp/xrdp.ini
