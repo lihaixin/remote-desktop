@@ -13,14 +13,13 @@ RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html \
     && echo "admin:admin" | /usr/sbin/chpasswd \
     && echo "admin    ALL=(ALL) ALL" >> /etc/sudoers
     
-USER admin
+
 ADD supervisord.conf /etc/supervisord.conf
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 ADD menu /home/admin/.fluxbox/menu
 ADD entrypoint.sh /entrypoint.sh
-
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 5901 6901 3389
-
+USER admin
 ENTRYPOINT ["/bin/bash", "-c", "/entrypoint.sh"]
