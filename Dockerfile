@@ -8,7 +8,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 RUN apk update \
  && apk add --no-cache xvfb x11vnc fluxbox supervisor xterm bash pcmanfm chromium firefox xrdp wqy-zenhei wget ca-certificates tar \
  && mkdir -p $NOVNCHOME/utils/websockify \
- && wget -qO- https://github.com/noVNC/noVNC/archive/v1.1.0.tar.gz | tar xz --strip 1 -C $NOVNCHOME \
+ && wget -qO- https://github.com/noVNC/noVNC/archive/v1.2.0.tar.gz | tar xz --strip 1 -C $NOVNCHOME \
  && wget -qO- https://github.com/noVNC/websockify/archive/v0.9.0.tar.gz | tar xz --strip 1 -C $NOVNCHOME/utils/websockify \
  && chmod +x -v /root/noVNC/utils/*.sh \
  && ln -s $NOVNCHOME/vnc_auto.html $NOVNCHOME/index.html \
