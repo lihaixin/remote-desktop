@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.12
 
 ENV DISPLAY :0
 ENV RESOLUTION=1024x768
